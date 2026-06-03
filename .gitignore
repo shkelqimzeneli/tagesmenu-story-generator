@@ -1,0 +1,38 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+
+# Local exports and generated files
+exports/
+Output/
+*-api.html
+*.png
+*.jpg
+*.jpeg
+!public/**/*.png
+!public/**/*.jpg
+!public/**/*.jpeg
+!chef-icon.png
+
+# Runtime / portable clone files
+Runtime/
+*.zip
+
+# Environment and secrets
+.env
+*.local
+*.key
+*.pem
+service-account*.json
+google-credentials*.json
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS/editor files
+.DS_Store
+Thumbs.db
+.vscode/

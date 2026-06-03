@@ -1,0 +1,70 @@
+# Tagesmenu Story Generator
+
+React + Node app for generating Instagram story PNGs from Lunchgate menu APIs.
+
+## Requirements
+
+- Windows, macOS, or Linux
+- Node.js 22 or newer
+- Internet access for Lunchgate API data
+
+## Setup
+
+```bash
+npm install
+npm exec playwright install chromium
+```
+
+## Run
+
+```bash
+npm run start
+```
+
+Then open:
+
+```text
+http://127.0.0.1:5173/
+```
+
+On Windows you can also double-click:
+
+```text
+Start-Tagesmenu-App.ps1
+```
+
+## Export Output
+
+PNG exports are saved locally when Google Drive credentials are not configured.
+
+Default export folder:
+
+```text
+exports/
+```
+
+You can change it with:
+
+```env
+APP_EXPORT_ROOT=C:\path\to\your\folder
+```
+
+## Google Drive
+
+Google Drive upload is optional. Copy `.env.example` to `.env` and configure:
+
+```env
+GOOGLE_APPLICATION_CREDENTIALS=
+GOOGLE_DRIVE_FOLDER_ID=
+```
+
+Do not commit `.env` or credential JSON files.
+
+## Included Restaurants
+
+- Türmli
+- Kuonimatt
+- LUX
+- Zellfeld
+- Fischerstube
+- Militärgarten

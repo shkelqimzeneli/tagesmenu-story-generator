@@ -1,0 +1,1104 @@
+@font-face {
+  font-family: 'Avenir Menu';
+  src: url('/fonts/Avenir.ttc') format('truetype-collection');
+  font-weight: 300 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Bebas Menu';
+  src: url('/fonts/BebasNeue-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Helium Menu';
+  src: url('/fonts/Helium-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Miga Wisteria';
+  src: url('/fonts/Wisteria.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Miga Minion';
+  src: url('/fonts/MinionPro-Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Miga Lora';
+  src: url('/fonts/Lora-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Luxia';
+  src: url('/fonts/LuxiaRegular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Lux Lora';
+  src: url('/fonts/Lora-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Lux Lora';
+  src: url('/fonts/Lora-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Lux Lora';
+  src: url('/fonts/Lora-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'ZF Catalina';
+  src: url('/fonts/Catalina-Village.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'ZF Catalina Rayden';
+  src: url('/fonts/Catalina-Rayden.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'FS Gilmoray';
+  src: url('/fonts/Gilmoray.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  color: #1f2933;
+  font-family: 'Avenir Menu', Avenir, 'Avenir Next', Arial, sans-serif;
+  background: #edf0ed;
+}
+
+button,
+input,
+select {
+  font: inherit;
+}
+
+.app-shell {
+  min-height: 100vh;
+  padding: 24px;
+}
+
+.workspace {
+  display: grid;
+  grid-template-columns: minmax(320px, 420px) 1fr;
+  gap: 24px;
+  max-width: 1320px;
+  margin: 0 auto;
+}
+
+.control-panel {
+  align-self: start;
+  display: grid;
+  gap: 18px;
+  padding: 22px;
+  background: #ffffff;
+  border: 1px solid #d9ded8;
+  border-radius: 8px;
+  box-shadow: 0 18px 50px rgba(42, 51, 44, 0.08);
+}
+
+.panel-heading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.panel-heading p {
+  margin: 0;
+  color: #637066;
+  font-size: 14px;
+}
+
+.panel-heading strong {
+  font-size: 14px;
+  color: #255b43;
+}
+
+label,
+.dish-editor {
+  display: grid;
+  gap: 8px;
+  color: #475449;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+input,
+select {
+  width: 100%;
+  min-height: 42px;
+  padding: 10px 12px;
+  color: #1d2a22;
+  background: #f9faf8;
+  border: 1px solid #ccd4cb;
+  border-radius: 6px;
+}
+
+.field-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.dishes {
+  display: grid;
+  gap: 12px;
+}
+
+.dish-editor {
+  padding: 14px;
+  background: #f7f8f5;
+  border: 1px solid #e1e5de;
+  border-radius: 8px;
+}
+
+.button-row {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.button-row button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  min-height: 42px;
+  color: #ffffff;
+  background: #355f4c;
+  border: 0;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.button-row button:hover {
+  background: #244938;
+}
+
+.preview-stage {
+  display: grid;
+  justify-items: center;
+  gap: 14px;
+  min-width: 0;
+}
+
+.preview-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #526157;
+  font-size: 14px;
+}
+
+.story-frame {
+  width: 1080px;
+  height: 1920px;
+  position: relative;
+  overflow: hidden;
+  color: #00533d;
+  background: #00533d;
+  font-family: 'Avenir Menu', Avenir, 'Avenir Next', Arial, sans-serif;
+}
+
+.story-preview-viewport {
+  width: min(432px, 100%);
+  aspect-ratio: 9 / 16;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 24px 70px rgba(31, 42, 34, 0.22);
+}
+
+.story-preview-viewport .story-frame {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%) scale(var(--preview-scale, 0.4));
+  transform-origin: top center;
+}
+
+.story-template,
+.story-content {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.story-template {
+  object-fit: cover;
+}
+
+.is-kuonimatt {
+  color: #ffffff;
+  background: #000000;
+  font-family: 'Bebas Menu', 'Arial Narrow', Arial, sans-serif;
+}
+
+.is-militaergarten {
+  color: #003a34;
+  background: #062520;
+  font-family: 'Miga Minion', Georgia, serif;
+}
+
+.is-lux {
+  color: #eee9e1;
+  background: #111111;
+  font-family: 'Lux Lora', Georgia, serif;
+}
+
+.is-zellfeld {
+  color: #151a2a;
+  background: #ffffff;
+  font-family: 'ZF Catalina', 'Miga Minion', Georgia, serif;
+}
+
+.is-fischerstube {
+  color: #000000;
+  background: #f8fbfb;
+  font-family: 'FS Gilmoray', 'Avenir Menu', Arial, sans-serif;
+}
+
+.fs-content {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.fs-date {
+  position: absolute;
+  z-index: 2;
+  top: 480px;
+  left: 350px;
+  width: 380px;
+  color: #114c82;
+  font-family: 'FS Gilmoray', Georgia, serif;
+  font-size: 49px;
+  font-weight: 400;
+  line-height: 1;
+  text-align: center;
+  letter-spacing: 0;
+}
+
+.fs-dishes {
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  width: 100%;
+  text-align: center;
+}
+
+.fs-dish {
+  position: absolute;
+  left: 190px;
+  width: 700px;
+  height: 270px;
+  display: grid;
+  justify-items: center;
+  color: #000000;
+  text-align: center;
+}
+
+.fs-dish:nth-of-type(1) {
+  top: 588px;
+}
+
+.fs-dish:nth-of-type(2) {
+  top: 1035px;
+}
+
+.fs-dish:nth-of-type(3) {
+  top: 1440px;
+}
+
+.fs-dish h2 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  max-width: 720px;
+  max-height: 2.15em;
+  margin: 0;
+  overflow: hidden;
+  color: #000000;
+  font-family: 'FS Gilmoray', Georgia, serif;
+  font-size: 62px;
+  font-weight: 400;
+  line-height: 1.03;
+  letter-spacing: 0;
+  text-align: center;
+  text-wrap: balance;
+}
+
+.fs-dish h2.fit-fs-long {
+  font-size: 58px;
+}
+
+.fs-dish h2.fit-fs-xlong {
+  font-size: 53px;
+}
+
+.fs-dish h2.fit-fs-xxlong {
+  font-size: 48px;
+}
+
+.fs-dish p {
+  position: absolute;
+  top: 78px;
+  left: 25px;
+  right: 25px;
+  display: grid;
+  gap: 0;
+  max-width: 650px;
+  max-height: 3.05em;
+  margin: 0;
+  overflow: hidden;
+  color: #000000;
+  font-family: 'Avenir Menu', Avenir, Arial, sans-serif;
+  font-size: 39px;
+  font-weight: 400;
+  line-height: 1.02;
+  letter-spacing: 0;
+  text-align: center;
+}
+
+.fs-dish p span {
+  display: block;
+}
+
+.fs-dish strong {
+  position: absolute;
+  top: 214px;
+  left: 0;
+  right: 0;
+  margin: 0;
+  color: #114c82;
+  font-family: 'FS Gilmoray', Georgia, serif;
+  font-size: 49px;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: 0;
+}
+
+.fs-separator {
+  position: absolute;
+  z-index: 2;
+  left: 318px;
+  width: 444px;
+  height: auto;
+}
+
+.fs-separator-1 {
+  top: 927px;
+}
+
+.fs-separator-2 {
+  top: 1345px;
+}
+
+.zf-content {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.zf-date {
+  position: absolute;
+  z-index: 2;
+  top: 145px;
+  left: 590px;
+  width: 350px;
+  color: #151a2a;
+  font-family: 'ZF Catalina', 'Miga Minion', Georgia, serif;
+  font-size: 48px;
+  font-weight: 400;
+  line-height: 1;
+  text-align: center;
+  letter-spacing: 0;
+}
+
+.zf-dishes {
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  width: 100%;
+  text-align: center;
+}
+
+.zf-dish {
+  position: absolute;
+  left: 485px;
+  width: 560px;
+  display: grid;
+  justify-items: center;
+  color: #000000;
+  text-align: center;
+}
+
+.zf-dish:nth-child(1) {
+  top: 420px;
+}
+
+.zf-dish:nth-child(2) {
+  top: 805px;
+}
+
+.zf-dish h2,
+.zf-pizza h2,
+.zf-included h2 {
+  margin: 0;
+  color: #000000;
+  font-family: 'ZF Catalina Rayden', 'ZF Catalina', Georgia, serif;
+  font-size: 55px;
+  font-weight: 400;
+  line-height: 1.14;
+  letter-spacing: 0;
+  text-align: center;
+  text-wrap: balance;
+}
+
+.zf-dish h2 {
+  max-width: 540px;
+  max-height: 3.5em;
+  overflow: visible;
+}
+
+.zf-dish h2.fit-zf-long {
+  font-size: 52px;
+}
+
+.zf-dish h2.fit-zf-xlong {
+  font-size: 49px;
+}
+
+.zf-dish h2.fit-zf-xxlong {
+  font-size: 46px;
+}
+
+.zf-dish p,
+.zf-included p {
+  display: grid;
+  gap: 0;
+  max-width: 540px;
+  margin: 16px 0 0;
+  color: #151a2a;
+  font-family: 'ZF Catalina', 'Miga Minion', Georgia, serif;
+  font-size: 32px;
+  font-weight: 400;
+  line-height: 1.02;
+  letter-spacing: 0;
+  text-align: center;
+}
+
+.zf-dish p span,
+.zf-included p span {
+  display: block;
+}
+
+.zf-dish strong {
+  margin-top: 72px;
+  color: #151a2a;
+  font-family: 'ZF Catalina', 'Miga Minion', Georgia, serif;
+  font-size: 45px;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: 0;
+}
+
+.zf-pizza {
+  position: absolute;
+  z-index: 2;
+  top: 1171px;
+  left: 500px;
+  width: 530px;
+  text-align: center;
+}
+
+.zf-pizza h2 {
+  font-size: 55px;
+}
+
+.zf-included {
+  position: absolute;
+  z-index: 2;
+  top: 1330px;
+  left: 500px;
+  width: 530px;
+  display: grid;
+  justify-items: center;
+  text-align: center;
+}
+
+.zf-included h2 {
+  font-size: 44px;
+}
+
+.zf-included p {
+  margin-top: 3px;
+  font-size: 35px;
+  line-height: 1.1;
+}
+
+.lux-content {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.lux-date {
+  position: absolute;
+  z-index: 2;
+  top: 592px;
+  left: 330px;
+  width: 420px;
+  color: #efc89d;
+  font-family: 'Luxia', 'Lux Lora', Georgia, serif;
+  font-size: 56px;
+  font-weight: 400;
+  line-height: 1;
+  text-align: center;
+  letter-spacing: 0;
+}
+
+.lux-dishes {
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  width: 100%;
+  text-align: center;
+}
+
+.lux-dish {
+  position: absolute;
+  left: 160px;
+  width: 760px;
+  min-height: 250px;
+  display: grid;
+  justify-items: center;
+  color: #f2eee8;
+  text-align: center;
+}
+
+.lux-dish:nth-child(1) {
+  top: 803px;
+}
+
+.lux-dish:nth-child(2) {
+  top: 1085px;
+}
+
+.lux-dish h2 {
+  max-width: 760px;
+  max-height: 2.25em;
+  margin: 0;
+  overflow: visible;
+  color: #f3f0eb;
+  font-family: 'Luxia', 'Lux Lora', Georgia, serif;
+  font-size: 58px;
+  font-weight: 400;
+  line-height: 1.09;
+  letter-spacing: 0;
+  text-wrap: wrap;
+}
+
+.lux-dish h2.fit-lux-title-xlong {
+  font-size: 52px;
+  line-height: 1.08;
+}
+
+.lux-dish h2.fit-lux-title-xxlong {
+  font-size: 47px;
+  line-height: 1.08;
+}
+
+.lux-dish p {
+  display: grid;
+  gap: 0;
+  max-width: 700px;
+  margin: 12px 0 0;
+  color: #eee9e1;
+  font-family: 'Lux Lora', Georgia, serif;
+  font-size: 43px;
+  font-weight: 400;
+  line-height: 1.08;
+  letter-spacing: 0;
+}
+
+.lux-dish p.fit-lux-desc-xlong {
+  max-width: 690px;
+  font-size: 36px;
+  line-height: 1.04;
+}
+
+.lux-dish p.fit-lux-desc-xxlong {
+  max-width: 680px;
+  font-size: 32px;
+  line-height: 1.04;
+}
+
+.lux-dish p > span {
+  display: block;
+}
+
+.lux-dish strong {
+  margin-top: 34px;
+  color: #efc89d;
+  font-family: 'Lux Lora', Georgia, serif;
+  font-size: 44px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0;
+}
+
+.lux-umlaut {
+  font-family: 'Lux Lora', Georgia, serif;
+  font-weight: 500;
+  display: inline;
+}
+
+.miga-content {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.miga-date {
+  position: absolute;
+  z-index: 2;
+  top: 407px;
+  left: 340px;
+  width: 400px;
+  height: 54px;
+  display: grid;
+  place-items: center;
+  color: #ead8b4;
+  font-family: 'Miga Wisteria', 'Miga Minion', Georgia, serif;
+  font-size: 54px;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: 0;
+  text-align: center;
+}
+
+.miga-dishes {
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  width: 100%;
+  text-align: center;
+}
+
+.miga-dish {
+  position: absolute;
+  left: 140px;
+  width: 800px;
+  display: grid;
+  justify-items: center;
+  text-align: center;
+  color: #003a34;
+}
+
+.miga-dish:nth-child(1) {
+  top: 625px;
+}
+
+.miga-dish:nth-child(2) {
+  top: 930px;
+}
+
+.miga-dish h2 {
+  max-width: 760px;
+  max-height: 2.08em;
+  margin: 0;
+  overflow: hidden;
+  color: #003a34;
+  font-family: 'Miga Wisteria', 'Miga Minion', Georgia, serif;
+  font-size: 60px;
+  font-weight: 400;
+  line-height: 1.04;
+  letter-spacing: 0;
+  text-wrap: balance;
+}
+
+.miga-dish h2.fit-miga-long {
+  font-size: 54px;
+}
+
+.miga-dish h2.fit-miga-xlong {
+  font-size: 48px;
+}
+
+.miga-dish h2.fit-miga-xxlong {
+  font-size: 43px;
+}
+
+.miga-dish p {
+  display: grid;
+  gap: 0;
+  max-width: 690px;
+  margin: 18px 0 0;
+  color: #1b1b1b;
+  font-family: 'Miga Minion', Georgia, serif;
+  font-size: 37px;
+  font-weight: 400;
+  line-height: 0.92;
+  letter-spacing: 0;
+}
+
+.miga-dish p span {
+  display: block;
+}
+
+.miga-dish strong {
+  margin-top: 35px;
+  color: #003a34;
+  font-family: 'Miga Lora', Georgia, serif;
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0;
+}
+
+.kuo-content {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.kuo-date {
+  position: absolute;
+  z-index: 2;
+  top: 531px;
+  left: 516px;
+  width: 298px;
+  height: 86px;
+  display: grid;
+  place-items: center;
+  padding-bottom: 6px;
+  color: #ffffff;
+  font-family: 'Bebas Menu', 'Arial Narrow', Arial, sans-serif;
+  font-size: 50px;
+  font-weight: 700;
+  line-height: 0.9;
+  letter-spacing: 0;
+}
+
+.kuo-dishes {
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  width: 100%;
+  text-align: center;
+}
+
+.kuo-dish {
+  position: absolute;
+  left: 390px;
+  width: 550px;
+  height: 320px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 2px;
+  overflow: visible;
+}
+
+.kuo-dish:nth-child(1) {
+  top: 705px;
+}
+
+.kuo-dish:nth-child(2) {
+  top: 955px;
+}
+
+.kuo-dish:nth-child(2) h2 {
+  max-width: 550px;
+  font-size: 55px;
+}
+
+.kuo-dish:nth-child(2) p {
+  font-size: 40px;
+}
+
+.kuo-dish:nth-child(2) strong {
+  margin-top: 28px;
+}
+
+.kuo-dish h2 {
+  margin: 0;
+  color: #ffffff;
+  font-family: 'Bebas Menu', 'Arial Narrow', Arial, sans-serif;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.kuo-dish h2 {
+  max-width: 550px;
+  font-size: 55px;
+  line-height: 1.05;
+  text-wrap: balance;
+  overflow-wrap: normal;
+  white-space: normal;
+  max-height: 2.36em;
+  overflow: hidden;
+}
+
+.kuo-dish h2.fit-long {
+  font-size: 55px;
+  max-width: 550px;
+}
+
+.kuo-dish h2.fit-xlong {
+  font-size: 55px;
+  max-width: 550px;
+}
+
+.kuo-dish h2.fit-xxlong {
+  font-size: 55px;
+  line-height: 1.18;
+  max-width: 550px;
+  text-wrap: wrap;
+}
+
+.kuo-dish p,
+.kuo-pizza p,
+.kuo-included p {
+  margin: 0;
+  color: #ffffff;
+  font-family: 'Helium Menu', Georgia, serif;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+
+.kuo-dish p {
+  display: grid;
+  gap: 2px;
+  font-size: 40px;
+  line-height: 0.96;
+  max-width: 550px;
+}
+
+.kuo-dish p.fit-desc-long {
+  font-size: 35px;
+}
+
+.kuo-dish p span {
+  display: block;
+}
+
+.kuo-dish strong {
+  margin-top: 28px;
+  color: #a98b62;
+  font-family: 'Helium Menu', Georgia, serif;
+  font-size: 43px;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.kuo-pizza {
+  position: absolute;
+  z-index: 2;
+  top: 1345px;
+  left: 390px;
+  width: 550px;
+  display: grid;
+  justify-items: center;
+  gap: 28px;
+  text-align: center;
+}
+
+.kuo-pizza h2,
+.kuo-included h2 {
+  margin: 0;
+  color: #ffffff;
+  font-family: 'Bebas Menu', 'Arial Narrow', Arial, sans-serif;
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.kuo-pizza h2 {
+  font-size: 55px;
+}
+
+.kuo-pizza p {
+  font-size: 40px;
+  line-height: 1;
+}
+
+.kuo-included {
+  position: absolute;
+  z-index: 2;
+  top: 1598px;
+  left: 340px;
+  width: 650px;
+  display: grid;
+  justify-items: center;
+  gap: 19px;
+  text-align: center;
+  overflow: hidden;
+}
+
+.kuo-included h2 {
+  font-size: 55px;
+}
+
+.kuo-included p {
+  color: #ffffff;
+  font-size: 40px;
+  line-height: 1;
+}
+
+.date-pill {
+  position: absolute;
+  top: 447px;
+  left: 370px;
+  width: 350px;
+  height: 68px;
+  display: grid;
+  place-items: center;
+  padding-top: 0;
+  color: #00533d;
+  font-size: 42px;
+  font-weight: 800;
+  letter-spacing: 0;
+  line-height: 1;
+}
+
+.intro {
+  position: absolute;
+  top: 1168px;
+  left: 190px;
+  width: 700px;
+  text-align: center;
+}
+
+.intro h1 {
+  margin: 0 0 30px;
+  color: #00533d;
+  font-size: 60px;
+  line-height: 1;
+  font-weight: 800;
+  letter-spacing: 0;
+}
+
+.intro p {
+  margin: 0;
+  color: #111111;
+  font-size: 40px;
+  line-height: 1.18;
+  font-weight: 300;
+}
+
+.intro span {
+  display: block;
+}
+
+.menu-list {
+  position: absolute;
+  top: 610px;
+  left: 140px;
+  width: 800px;
+  display: grid;
+  gap: 98px;
+  text-align: center;
+}
+
+.story-dish {
+  display: grid;
+  gap: 10px;
+}
+
+.story-dish h2 {
+  margin: 0;
+  color: #00533d;
+  font-size: 66px;
+  line-height: 1.02;
+  font-weight: 800;
+  letter-spacing: 0;
+}
+
+.story-dish p {
+  margin: 0;
+  color: #00533d;
+  font-size: 38px;
+  line-height: 1.1;
+  font-weight: 300;
+}
+
+.story-dish strong {
+  color: #00533d;
+  font-size: 44px;
+  line-height: 1;
+  font-weight: 800;
+  margin-top: 20px;
+}
+
+@media (max-width: 900px) {
+  .app-shell {
+    padding: 16px;
+  }
+
+  .workspace {
+    grid-template-columns: 1fr;
+  }
+
+  .field-grid,
+  .button-row {
+    grid-template-columns: 1fr;
+  }
+}
