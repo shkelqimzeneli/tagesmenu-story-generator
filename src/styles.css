@@ -483,8 +483,8 @@ select {
 
 .zf-dish {
   position: absolute;
-  left: 485px;
-  width: 560px;
+  left: 470px;
+  width: 610px;
   display: grid;
   justify-items: center;
   color: #000000;
@@ -514,9 +514,14 @@ select {
 }
 
 .zf-dish h2 {
-  max-width: 540px;
-  max-height: 3.5em;
+  max-width: 600px;
+  max-height: 2.4em;
   overflow: visible;
+}
+
+.zf-dish h2 span {
+  display: block;
+  white-space: nowrap;
 }
 
 .zf-dish h2.fit-zf-long {
@@ -529,6 +534,7 @@ select {
 
 .zf-dish h2.fit-zf-xxlong {
   font-size: 46px;
+  max-height: 3.5em;
 }
 
 .zf-dish p,

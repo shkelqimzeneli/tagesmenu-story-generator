@@ -292,7 +292,9 @@ function ZellfeldStory({ menu }) {
         <section className="zf-dishes">
           {menu.dishes.slice(0, 2).map((dish, index) => (
             <div className="zf-dish" key={`${dish.name}-${index}`}>
-              <h2 className={fitZellfeldTitleClass(dish.name)}>{dish.name}</h2>
+              <h2 className={fitZellfeldTitleClass(dish.name)}>
+                {zellfeldTitleLines(dish.name).map((line) => <span key={line}>{line}</span>)}
+              </h2>
               <p>{descriptionLines(dish).map((line) => <span key={line}>{line}</span>)}</p>
               <strong>{dish.price}</strong>
             </div>
@@ -442,9 +444,63 @@ function fitMigaTitleClass(text) {
 function fitZellfeldTitleClass(text) {
   const length = String(text || '').length;
   if (length > 76) return 'fit-zf-xxlong';
-  if (length > 60) return 'fit-zf-xlong';
-  if (length > 44) return 'fit-zf-long';
+  if (length > 58) return 'fit-zf-xlong';
+  if (length > 34) return 'fit-zf-long';
   return '';
+}
+
+function zellfeldTitleLines(value) {
+  const text = String(value || '').replace(/\s+/g, ' ').trim();
+  if (!text) return [''];
+
+  const words = text.split(' ');
+  if (words.length < 3 || text.length <= 28) return [text];
+
+  return balanceWords(words, text.length > 76 ? 3 : 2);
+}
+
+function balanceWords(words, lineCount) {
+  if (lineCount === 2) {
+    let best = [words.join(' ')];
+    let bestScore = Number.POSITIVE_INFINITY;
+
+    for (let index = 1; index < words.length; index += 1) {
+      const lines = [words.slice(0, index).join(' '), words.slice(index).join(' ')];
+      const lengths = lines.map((line) => line.length);
+      const score = Math.max(...lengths) + Math.abs(lengths[0] - lengths[1]) * 0.55;
+
+      if (score < bestScore) {
+        best = lines;
+        bestScore = score;
+      }
+    }
+
+    return best;
+  }
+
+  let best = [words.join(' ')];
+  let bestScore = Number.POSITIVE_INFINITY;
+
+  for (let first = 1; first < words.length - 1; first += 1) {
+    for (let second = first + 1; second < words.length; second += 1) {
+      const lines = [
+        words.slice(0, first).join(' '),
+        words.slice(first, second).join(' '),
+        words.slice(second).join(' ')
+      ];
+      const lengths = lines.map((line) => line.length);
+      const average = lengths.reduce((sum, length) => sum + length, 0) / lengths.length;
+      const variance = lengths.reduce((sum, length) => sum + Math.abs(length - average), 0);
+      const score = Math.max(...lengths) + variance * 0.45;
+
+      if (score < bestScore) {
+        best = lines;
+        bestScore = score;
+      }
+    }
+  }
+
+  return best;
 }
 
 function fitFischerstubeTitleClass(text) {
