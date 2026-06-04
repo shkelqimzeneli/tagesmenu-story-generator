@@ -43,6 +43,14 @@ The Windows launcher installs missing packages and the PNG export browser the fi
 
 It also installs the bundled fonts for the current Windows user. The app still loads fonts directly from `public/fonts`, so the menu designs keep their fonts even before the fonts are available system-wide.
 
+## Updates
+
+Use the `Get updates` button inside the app to pull the newest GitHub version.
+
+This only works when the app was downloaded with `git clone`. If someone downloaded the app as a ZIP, they need to download it again or clone the repository.
+
+If the update changes backend files or dependencies, restart the app after the update finishes.
+
 ## Export Output
 
 PNG exports are saved locally when Google Drive credentials are not configured.

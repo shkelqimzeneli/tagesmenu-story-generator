@@ -1,14 +1,17 @@
 import 'dotenv/config';
 import cors from 'cors';
 import express from 'express';
+import { execFile } from 'node:child_process';
 import fs from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
+import { promisify } from 'node:util';
 import { chromium } from 'playwright';
 import { google } from 'googleapis';
 
 const app = express();
 const port = Number(process.env.PORT || 4300);
+const execFileAsync = promisify(execFile);
 
 app.use(cors());
 app.use(express.json({ limit: '2mb' }));
@@ -186,6 +189,15 @@ app.get('/api/restaurants', (_req, res) => {
     { id: 'militaergarten', name: 'Militärgarten' },
     
   ]);
+});
+
+app.post('/api/update', async (_req, res) => {
+  try {
+    const result = await updateFromGit();
+    res.json(result);
+  } catch (error) {
+    res.status(500).json({ ok: false, error: error.message });
+  }
 });
 
 app.get('/api/menu/:restaurantId', async (req, res) => {
@@ -778,6 +790,80 @@ function addDays(date, days) {
   const nextDate = new Date(date);
   nextDate.setDate(nextDate.getDate() + days);
   return nextDate;
+}
+
+async function updateFromGit() {
+  const cwd = process.cwd();
+
+  try {
+    await fs.access(path.join(cwd, '.git'));
+  } catch {
+    return {
+      ok: false,
+      error: 'This app was downloaded as a ZIP. To use Get updates, download it with git clone instead.'
+    };
+  }
+
+  const status = await runCommand('git', ['status', '--porcelain'], { cwd });
+  if (status.stdout.trim()) {
+    return {
+      ok: false,
+      error: 'There are local file changes. Save or remove them before updating.'
+    };
+  }
+
+  const before = (await runCommand('git', ['rev-parse', 'HEAD'], { cwd })).stdout.trim();
+  const pull = await runCommand('git', ['pull', '--ff-only'], { cwd });
+  const after = (await runCommand('git', ['rev-parse', 'HEAD'], { cwd })).stdout.trim();
+
+  if (before === after) {
+    return {
+      ok: true,
+      updated: false,
+      message: 'Already up to date.'
+    };
+  }
+
+  const changedFiles = (await runCommand('git', ['diff', '--name-only', `${before}..${after}`], { cwd }))
+    .stdout
+    .split(/\r?\n/)
+    .filter(Boolean);
+
+  const npmChanged = changedFiles.some((file) => file === 'package.json' || file === 'package-lock.json');
+  const fontsChanged = changedFiles.some((file) => file.startsWith('public/fonts/'));
+  const restartNeeded = changedFiles.some((file) => file.startsWith('server/') || file === 'package.json' || file === 'package-lock.json');
+
+  if (npmChanged) {
+    await runCommand(process.platform === 'win32' ? 'npm.cmd' : 'npm', ['install'], { cwd });
+  }
+
+  if (fontsChanged && process.platform === 'win32') {
+    await runCommand('powershell.exe', ['-NoProfile', '-ExecutionPolicy', 'Bypass', '-File', path.join(cwd, 'Install-Fonts.ps1')], { cwd });
+  }
+
+  return {
+    ok: true,
+    updated: true,
+    before,
+    after,
+    changedFiles,
+    restartNeeded,
+    message: restartNeeded ? 'Updates installed. Restart the app to finish.' : 'Updates installed. Reloading the app is enough.',
+    pullOutput: pull.stdout.trim()
+  };
+}
+
+async function runCommand(command, args, options) {
+  try {
+    return await execFileAsync(command, args, {
+      ...options,
+      windowsHide: true,
+      maxBuffer: 1024 * 1024 * 10
+    });
+  } catch (error) {
+    const output = [error.stdout, error.stderr].filter(Boolean).join('\n').trim();
+    throw new Error(output || error.message);
+  }
 }
 
 function safeName(value) {

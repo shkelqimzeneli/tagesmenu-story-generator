@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { createRoot } from 'react-dom/client';
-import { CalendarDays, CloudUpload, Download, RefreshCw } from 'lucide-react';
+import { CalendarDays, CloudUpload, Download, RefreshCw, RotateCw } from 'lucide-react';
 import './styles.css';
 
 const API_BASE = import.meta.env.VITE_API_BASE || 'http://127.0.0.1:4300';
@@ -121,6 +121,28 @@ function App() {
     setStatus(result.uploaded ? `Uploaded ${completed} stories to Drive` : `Saved ${completed} stories: ${result.exportFolder}`);
   }
 
+  async function getUpdates() {
+    setStatus('Checking for updates');
+    const response = await fetch(`${API_BASE}/api/update`, { method: 'POST' });
+    const result = await response.json();
+
+    if (!result.ok) {
+      setStatus(`Update failed: ${result.error}`);
+      return;
+    }
+
+    if (!result.updated) {
+      setStatus(result.message || 'Already up to date');
+      return;
+    }
+
+    setStatus(result.message || 'Updates installed');
+
+    if (!result.restartNeeded) {
+      window.setTimeout(() => window.location.reload(), 900);
+    }
+  }
+
   if (renderMenu) {
     return <StoryFrame menu={renderMenu} />;
   }
@@ -201,6 +223,10 @@ function App() {
             <button type="button" onClick={sendAllToDrive}>
               <CloudUpload size={18} />
               All Drive
+            </button>
+            <button type="button" onClick={getUpdates}>
+              <RotateCw size={18} />
+              Get updates
             </button>
           </div>
         </aside>
