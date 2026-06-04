@@ -8,6 +8,7 @@ dist/
 exports/
 Output/
 .setup/
+*.zip
 *-api.html
 *.png
 *.jpg

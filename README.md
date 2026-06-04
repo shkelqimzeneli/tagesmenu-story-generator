@@ -41,6 +41,8 @@ Start Daily Menus.vbs
 
 The Windows launcher installs missing packages and the PNG export browser the first time it runs.
 
+It also installs the bundled fonts for the current Windows user. The app still loads fonts directly from `public/fonts`, so the menu designs keep their fonts even before the fonts are available system-wide.
+
 ## Export Output
 
 PNG exports are saved locally when Google Drive credentials are not configured.

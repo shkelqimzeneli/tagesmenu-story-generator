@@ -3,6 +3,7 @@ $ErrorActionPreference = 'SilentlyContinue'
 $projectDir = Split-Path -Parent $MyInvocation.MyCommand.Path
 $setupDir = Join-Path $projectDir '.setup'
 $playwrightMarker = Join-Path $setupDir 'playwright-chromium-installed'
+$fontMarker = Join-Path $setupDir 'fonts-installed'
 
 New-Item -ItemType Directory -Path $setupDir -Force | Out-Null
 
@@ -29,6 +30,14 @@ Start-Sleep -Milliseconds 700
 
 if (!(Test-Path (Join-Path $projectDir 'node_modules'))) {
   Start-Process -FilePath 'npm.cmd' -ArgumentList 'install' -WorkingDirectory $projectDir -Wait -WindowStyle Hidden
+}
+
+if (!(Test-Path $fontMarker)) {
+  $fontInstaller = Join-Path $projectDir 'Install-Fonts.ps1'
+  if (Test-Path $fontInstaller) {
+    Start-Process -FilePath 'powershell.exe' -ArgumentList '-NoProfile', '-ExecutionPolicy', 'Bypass', '-File', $fontInstaller -WorkingDirectory $projectDir -Wait -WindowStyle Hidden
+  }
+  New-Item -ItemType File -Path $fontMarker -Force | Out-Null
 }
 
 if (!(Test-Path $playwrightMarker)) {
