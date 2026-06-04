@@ -65,7 +65,19 @@ function App() {
   function updateDish(index, field, value) {
     setMenu((current) => ({
       ...current,
-      dishes: current.dishes.map((dish, dishIndex) => (dishIndex === index ? { ...dish, [field]: value } : dish))
+      dishes: current.dishes.map((dish, dishIndex) => {
+        if (dishIndex !== index) return dish;
+
+        if (field === 'description') {
+          return {
+            ...dish,
+            description: value,
+            descriptionLines: value.split(/\n+/).filter(Boolean)
+          };
+        }
+
+        return { ...dish, [field]: value };
+      })
     }));
   }
 
