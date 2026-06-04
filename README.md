@@ -30,8 +30,16 @@ http://127.0.0.1:5173/
 On Windows you can also double-click:
 
 ```text
-Start-Tagesmenu-App.ps1
+Start Daily Menus.bat
 ```
+
+If you want the cleanest app-like start with no command window, double-click:
+
+```text
+Start Daily Menus.vbs
+```
+
+The Windows launcher installs missing packages and the PNG export browser the first time it runs.
 
 ## Export Output
 

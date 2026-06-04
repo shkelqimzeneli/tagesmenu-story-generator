@@ -1,6 +1,20 @@
 $ErrorActionPreference = 'SilentlyContinue'
 
 $projectDir = Split-Path -Parent $MyInvocation.MyCommand.Path
+$setupDir = Join-Path $projectDir '.setup'
+$playwrightMarker = Join-Path $setupDir 'playwright-chromium-installed'
+
+New-Item -ItemType Directory -Path $setupDir -Force | Out-Null
+
+if (!(Get-Command npm.cmd -ErrorAction SilentlyContinue)) {
+  Add-Type -AssemblyName System.Windows.Forms
+  [System.Windows.Forms.MessageBox]::Show(
+    "Node.js is missing. Install Node.js 22 or newer, then open the app again.",
+    "Tagesmenu Story Generator"
+  ) | Out-Null
+  Start-Process 'https://nodejs.org/'
+  exit 1
+}
 
 foreach ($port in @(4300, 5173)) {
   $processIds = Get-NetTCPConnection -LocalPort $port -State Listen |
@@ -12,6 +26,15 @@ foreach ($port in @(4300, 5173)) {
 }
 
 Start-Sleep -Milliseconds 700
+
+if (!(Test-Path (Join-Path $projectDir 'node_modules'))) {
+  Start-Process -FilePath 'npm.cmd' -ArgumentList 'install' -WorkingDirectory $projectDir -Wait -WindowStyle Hidden
+}
+
+if (!(Test-Path $playwrightMarker)) {
+  Start-Process -FilePath 'npm.cmd' -ArgumentList 'exec', 'playwright', 'install', 'chromium' -WorkingDirectory $projectDir -Wait -WindowStyle Hidden
+  New-Item -ItemType File -Path $playwrightMarker -Force | Out-Null
+}
 
 Start-Process -FilePath 'npm.cmd' -ArgumentList 'run', 'server' -WorkingDirectory $projectDir -WindowStyle Hidden
 Start-Process -FilePath 'npm.cmd' -ArgumentList 'run', 'dev', '--', '--host', '127.0.0.1' -WorkingDirectory $projectDir -WindowStyle Hidden
