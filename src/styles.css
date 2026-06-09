@@ -902,11 +902,11 @@ select {
 }
 
 .kuo-dish:nth-child(1) {
-  top: 705px;
+  top: 690px;
 }
 
 .kuo-dish:nth-child(2) {
-  top: 955px;
+  top: 990px;
 }
 
 .kuo-dish:nth-child(2) h2 {
@@ -953,8 +953,8 @@ select {
 }
 
 .kuo-dish h2.fit-xxlong {
-  font-size: 55px;
-  line-height: 1.18;
+  font-size: 52px;
+  line-height: 1.04;
   max-width: 550px;
   text-wrap: wrap;
 }
@@ -973,12 +973,13 @@ select {
   display: grid;
   gap: 2px;
   font-size: 40px;
-  line-height: 0.96;
+  line-height: 0.92;
   max-width: 550px;
 }
 
 .kuo-dish p.fit-desc-long {
-  font-size: 35px;
+  font-size: 36px;
+  line-height: 0.9;
 }
 
 .kuo-dish p span {
@@ -986,7 +987,7 @@ select {
 }
 
 .kuo-dish strong {
-  margin-top: 28px;
+  margin-top: 18px;
   color: #a98b62;
   font-family: 'Helium Menu', Georgia, serif;
   font-size: 43px;
@@ -997,7 +998,7 @@ select {
 .kuo-pizza {
   position: absolute;
   z-index: 2;
-  top: 1345px;
+  top: 1375px;
   left: 390px;
   width: 550px;
   display: grid;
