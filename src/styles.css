@@ -517,8 +517,10 @@ select {
   position: absolute;
   left: 470px;
   width: 610px;
+  height: 350px;
   display: grid;
   justify-items: center;
+  overflow: hidden;
   color: #000000;
   text-align: center;
 }
@@ -548,7 +550,7 @@ select {
 .zf-dish h2 {
   max-width: 600px;
   max-height: 2.4em;
-  overflow: visible;
+  overflow: hidden;
 }
 
 .zf-dish h2 span {
@@ -574,7 +576,9 @@ select {
   display: grid;
   gap: 0;
   max-width: 540px;
+  max-height: 3.1em;
   margin: 16px 0 0;
+  overflow: hidden;
   color: #151a2a;
   font-family: 'ZF Catalina', 'Miga Minion', Georgia, serif;
   font-size: 32px;
@@ -667,9 +671,10 @@ select {
   position: absolute;
   left: 160px;
   width: 760px;
-  min-height: 250px;
+  height: 250px;
   display: grid;
   justify-items: center;
+  overflow: hidden;
   color: #f2eee8;
   text-align: center;
 }
@@ -686,7 +691,7 @@ select {
   max-width: 760px;
   max-height: 2.25em;
   margin: 0;
-  overflow: visible;
+  overflow: hidden;
   color: #f3f0eb;
   font-family: 'Luxia', 'Lux Lora', Georgia, serif;
   font-size: 58px;
@@ -710,7 +715,9 @@ select {
   display: grid;
   gap: 0;
   max-width: 700px;
+  max-height: 3.2em;
   margin: 12px 0 0;
+  overflow: hidden;
   color: #eee9e1;
   font-family: 'Lux Lora', Georgia, serif;
   font-size: 43px;
@@ -1242,13 +1249,16 @@ select {
   position: static;
   width: 800px;
   display: grid;
-  gap: 44px;
+  grid-template-rows: 250px 290px;
+  gap: 30px;
 }
 
 .story-dish {
   display: grid;
   gap: 10px;
   justify-items: center;
+  align-content: start;
+  height: 100%;
   overflow: hidden;
 }
 
