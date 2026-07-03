@@ -275,20 +275,22 @@ function StoryFrame({ menu, preview = false }) {
       <div className="story-content">
         <div className="date-pill">{menu.date}</div>
 
-        <section className="menu-list">
-          {menu.dishes.map((dish, index) => (
+        <div className="tuermli-menu-stack">
+          <section className="menu-list">
+          {menu.dishes.slice(0, 2).map((dish, index) => (
             <div className="story-dish" key={`${dish.name}-${index}`}>
-              <h2>{dish.name}</h2>
-              {dish.description ? <p>{dish.description}</p> : null}
+              <h2 className={fitTuermliTitleClass(dish.name)}>{dish.name}</h2>
+              {dish.description ? <p className={fitTuermliDescriptionClass(descriptionLines(dish).join(' '))}>{descriptionLines(dish).slice(0, 3).map((line) => <span key={line}>{line}</span>)}</p> : null}
               <strong>{dish.price}</strong>
             </div>
           ))}
         </section>
 
-        <section className="intro">
+          <section className="intro">
           <h1>{menu.introTitle || 'Menü inklusive'}</h1>
           <p>{splitIncluded(menu.introDescription).map((line) => <span key={line}>{line}</span>)}</p>
         </section>
+        </div>
       </div>
     </article>
   );
@@ -401,11 +403,12 @@ function KuonimattStory({ menu }) {
       <div className="kuo-content">
         <div className="kuo-date">{menu.date}</div>
 
+        <div className="kuo-menu-stack">
         <section className="kuo-dishes">
           {menu.dishes.slice(0, 2).map((dish, index) => (
             <div className="kuo-dish" key={`${dish.name}-${index}`}>
-              <h2 className={fitTextClass(dish.name)}>{dish.name}</h2>
-              <p className={fitDescriptionClass(descriptionLines(dish).join(' '))}>{descriptionLines(dish).map((line) => <span key={line}>{line}</span>)}</p>
+              <h2 className={fitKuonimattTitleClass(dish.name)}>{kuonimattTitleLines(dish.name).map((line) => <span key={line}>{line}</span>)}</h2>
+              <p className={fitKuonimattDescriptionClass(descriptionLines(dish).join(' '))}>{descriptionLines(dish).slice(0, 3).map((line) => <span key={line}>{line}</span>)}</p>
               <strong>{dish.price}</strong>
             </div>
           ))}
@@ -418,8 +421,9 @@ function KuonimattStory({ menu }) {
 
         <section className="kuo-included">
           <h2>{menu.introTitle || 'MENÜ INKLUSIVE'}</h2>
-          <p>{menu.introDescription}</p>
+          <p>{splitIncluded(menu.introDescription).map((line) => <span key={line}>{line}</span>)}</p>
         </section>
+        </div>
       </div>
     </article>
   );
@@ -469,6 +473,43 @@ function fitTextClass(text) {
   if (length > 32) return 'fit-xlong';
   if (length > 24) return 'fit-long';
   return '';
+}
+
+function fitTuermliTitleClass(text) {
+  const length = String(text || '').length;
+  if (length > 58) return 'fit-tuermli-xxlong';
+  if (length > 42) return 'fit-tuermli-xlong';
+  if (length > 28) return 'fit-tuermli-long';
+  return '';
+}
+
+function fitTuermliDescriptionClass(text) {
+  const length = String(text || '').length;
+  if (length > 76) return 'fit-tuermli-desc-xxlong';
+  if (length > 54) return 'fit-tuermli-desc-xlong';
+  return '';
+}
+
+function fitKuonimattTitleClass(text) {
+  const length = String(text || '').length;
+  if (length > 62) return 'fit-kuo-xxlong';
+  if (length > 46) return 'fit-kuo-xlong';
+  if (length > 30) return 'fit-kuo-long';
+  return '';
+}
+
+function fitKuonimattDescriptionClass(text) {
+  const length = String(text || '').length;
+  if (length > 78) return 'fit-kuo-desc-xxlong';
+  if (length > 54) return 'fit-kuo-desc-xlong';
+  return '';
+}
+
+function kuonimattTitleLines(value) {
+  const text = String(value || '').replace(/\s+/g, ' ').trim();
+  if (!text) return [''];
+  if (text.length <= 24) return [text];
+  return balanceWords(text.split(' '), text.length > 62 ? 3 : 2);
 }
 
 function fitMigaTitleClass(text) {

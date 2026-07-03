@@ -1050,6 +1050,119 @@ select {
   line-height: 1;
 }
 
+.kuo-menu-stack {
+  position: absolute;
+  z-index: 2;
+  top: 675px;
+  left: 340px;
+  width: 650px;
+  height: 1085px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 44px;
+  overflow: hidden;
+  text-align: center;
+}
+
+.kuo-menu-stack .kuo-dishes {
+  position: static;
+  width: 100%;
+  display: grid;
+  gap: 50px;
+}
+
+.kuo-menu-stack .kuo-dish {
+  position: static;
+  left: auto;
+  width: 650px;
+  height: auto;
+  max-height: 285px;
+  display: flex;
+  overflow: hidden;
+}
+
+.kuo-menu-stack .kuo-dish h2 {
+  display: grid;
+  gap: 0;
+  max-width: 620px;
+  max-height: 3.2em;
+  overflow: hidden;
+  font-size: 54px;
+  line-height: 1.02;
+  text-wrap: balance;
+}
+
+.kuo-menu-stack .kuo-dish h2.fit-kuo-long {
+  font-size: 50px;
+}
+
+.kuo-menu-stack .kuo-dish h2.fit-kuo-xlong {
+  font-size: 46px;
+  line-height: 1;
+}
+
+.kuo-menu-stack .kuo-dish h2.fit-kuo-xxlong {
+  font-size: 42px;
+  line-height: 0.98;
+}
+
+.kuo-menu-stack .kuo-dish h2 span {
+  display: block;
+}
+
+.kuo-menu-stack .kuo-dish p {
+  max-width: 620px;
+  max-height: 3em;
+  overflow: hidden;
+  font-size: 38px;
+  line-height: 0.9;
+}
+
+.kuo-menu-stack .kuo-dish p.fit-kuo-desc-xlong {
+  font-size: 34px;
+  line-height: 0.88;
+}
+
+.kuo-menu-stack .kuo-dish p.fit-kuo-desc-xxlong {
+  font-size: 30px;
+  line-height: 0.86;
+}
+
+.kuo-menu-stack .kuo-dish strong {
+  margin-top: 18px;
+  font-size: 41px;
+}
+
+.kuo-menu-stack .kuo-pizza,
+.kuo-menu-stack .kuo-included {
+  position: static;
+  left: auto;
+  top: auto;
+  width: 650px;
+  flex: 0 0 auto;
+  overflow: hidden;
+}
+
+.kuo-menu-stack .kuo-pizza {
+  gap: 22px;
+  max-height: 140px;
+}
+
+.kuo-menu-stack .kuo-included {
+  max-height: 190px;
+  gap: 15px;
+}
+
+.kuo-menu-stack .kuo-included p {
+  display: grid;
+  gap: 0;
+}
+
+.kuo-menu-stack .kuo-included p span {
+  display: block;
+}
+
 .date-pill {
   position: absolute;
   top: 447px;
@@ -1068,10 +1181,29 @@ select {
 
 .intro {
   position: absolute;
-  top: 1168px;
+  top: 1210px;
   left: 190px;
   width: 700px;
   text-align: center;
+}
+
+.tuermli-menu-stack {
+  position: absolute;
+  top: 530px;
+  left: 140px;
+  width: 800px;
+  height: 840px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 44px;
+  overflow: hidden;
+  text-align: center;
+}
+
+.tuermli-menu-stack .intro {
+  position: static;
+  width: 700px;
 }
 
 .intro h1 {
@@ -1097,17 +1229,26 @@ select {
 
 .menu-list {
   position: absolute;
-  top: 610px;
+  top: 530px;
   left: 140px;
   width: 800px;
   display: grid;
-  gap: 98px;
+  gap: 25px;
   text-align: center;
+}
+
+.tuermli-menu-stack .menu-list {
+  position: static;
+  width: 800px;
+  display: grid;
+  gap: 44px;
 }
 
 .story-dish {
   display: grid;
   gap: 10px;
+  justify-items: center;
+  overflow: hidden;
 }
 
 .story-dish h2 {
@@ -1117,6 +1258,25 @@ select {
   line-height: 1.02;
   font-weight: 800;
   letter-spacing: 0;
+  max-width: 800px;
+  max-height: 2.15em;
+  overflow: hidden;
+  text-wrap: balance;
+}
+
+.story-dish h2.fit-tuermli-long {
+  font-size: 58px;
+  line-height: 1.02;
+}
+
+.story-dish h2.fit-tuermli-xlong {
+  font-size: 52px;
+  line-height: 1;
+}
+
+.story-dish h2.fit-tuermli-xxlong {
+  font-size: 46px;
+  line-height: 0.98;
 }
 
 .story-dish p {
@@ -1125,6 +1285,25 @@ select {
   font-size: 38px;
   line-height: 1.1;
   font-weight: 300;
+  display: grid;
+  gap: 0;
+  max-width: 780px;
+  max-height: 3.35em;
+  overflow: hidden;
+}
+
+.story-dish p.fit-tuermli-desc-xlong {
+  font-size: 34px;
+  line-height: 1.04;
+}
+
+.story-dish p.fit-tuermli-desc-xxlong {
+  font-size: 30px;
+  line-height: 1;
+}
+
+.story-dish p span {
+  display: block;
 }
 
 .story-dish strong {
