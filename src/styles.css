@@ -1152,6 +1152,7 @@ select {
 .kuo-menu-stack .kuo-included {
   max-height: 190px;
   gap: 15px;
+  margin-top: auto;
 }
 
 .kuo-menu-stack .kuo-included p {
