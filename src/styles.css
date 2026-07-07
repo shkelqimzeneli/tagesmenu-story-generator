@@ -315,6 +315,21 @@ select {
   object-fit: cover;
 }
 
+.auto-fit-content {
+  width: 100%;
+  display: grid;
+  justify-items: center;
+  transform: scale(var(--auto-fit-scale, 1));
+  transform-origin: top center;
+}
+
+.auto-fit-content h2,
+.auto-fit-content p,
+.auto-fit-content strong {
+  max-height: none;
+  overflow: visible;
+}
+
 .is-kuonimatt {
   color: #ffffff;
   background: #000000;
@@ -1212,6 +1227,8 @@ select {
 .tuermli-menu-stack .intro {
   position: static;
   width: 700px;
+  height: 210px;
+  overflow: hidden;
 }
 
 .intro h1 {

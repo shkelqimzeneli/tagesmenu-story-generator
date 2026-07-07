@@ -252,6 +252,7 @@ app.post('/api/render', async (req, res, next) => {
 
     await page.goto(`http://127.0.0.1:5173/render?menu=${payload}`, { waitUntil: 'networkidle' });
     const story = page.locator('[data-story-frame]');
+    await page.waitForTimeout(500);
     const png = await story.screenshot({ type: 'png' });
 
     res.setHeader('Content-Type', 'image/png');
@@ -323,6 +324,7 @@ async function renderPng(menu) {
     const page = await browser.newPage({ viewport: { width: 1080, height: 1920 }, deviceScaleFactor: 1 });
     const payload = encodeURIComponent(Buffer.from(JSON.stringify(menu)).toString('base64url'));
     await page.goto(`http://127.0.0.1:5173/render?menu=${payload}`, { waitUntil: 'networkidle' });
+    await page.waitForTimeout(500);
     return await page.locator('[data-story-frame]').screenshot({ type: 'png' });
   } finally {
     await browser.close();

@@ -278,18 +278,18 @@ function StoryFrame({ menu, preview = false }) {
         <div className="tuermli-menu-stack">
           <section className="menu-list">
           {menu.dishes.slice(0, 2).map((dish, index) => (
-            <div className="story-dish" key={`${dish.name}-${index}`}>
+            <AutoFitBlock className="story-dish" key={`${dish.name}-${index}`} minScale={0.42}>
               <h2 className={fitTuermliTitleClass(dish.name)}>{dish.name}</h2>
               {dish.description ? <p className={fitTuermliDescriptionClass(descriptionLines(dish).join(' '))}>{descriptionLines(dish).slice(0, 3).map((line) => <span key={line}>{line}</span>)}</p> : null}
               <strong>{dish.price}</strong>
-            </div>
+            </AutoFitBlock>
           ))}
         </section>
 
-          <section className="intro">
+          <AutoFitBlock className="intro" minScale={0.55}>
           <h1>{menu.introTitle || 'Menü inklusive'}</h1>
           <p>{splitIncluded(menu.introDescription).map((line) => <span key={line}>{line}</span>)}</p>
-        </section>
+        </AutoFitBlock>
         </div>
       </div>
     </article>
@@ -363,11 +363,11 @@ function LuxStory({ menu }) {
 
         <section className="lux-dishes">
           {menu.dishes.slice(0, 2).map((dish, index) => (
-            <div className="lux-dish" key={`${dish.name}-${index}`}>
+            <AutoFitBlock className="lux-dish" key={`${dish.name}-${index}`} minScale={0.38}>
               <h2 className={fitLuxTitleClass(dish.name)}>{renderLuxText(dish.name)}</h2>
               <p className={fitLuxDescriptionClass(descriptionLines(dish).join(' '))}>{descriptionLines(dish).map((line) => <span key={line}>{renderLuxText(line)}</span>)}</p>
               <strong>{dish.price}</strong>
-            </div>
+            </AutoFitBlock>
           ))}
         </section>
       </div>
@@ -406,26 +406,83 @@ function KuonimattStory({ menu }) {
         <div className="kuo-menu-stack">
         <section className="kuo-dishes">
           {menu.dishes.slice(0, 2).map((dish, index) => (
-            <div className="kuo-dish" key={`${dish.name}-${index}`}>
+            <AutoFitBlock className="kuo-dish" key={`${dish.name}-${index}`} minScale={0.42}>
               <h2 className={fitKuonimattTitleClass(dish.name)}>{kuonimattTitleLines(dish.name).map((line) => <span key={line}>{line}</span>)}</h2>
               <p className={fitKuonimattDescriptionClass(descriptionLines(dish).join(' '))}>{descriptionLines(dish).slice(0, 3).map((line) => <span key={line}>{line}</span>)}</p>
               <strong>{dish.price}</strong>
-            </div>
+            </AutoFitBlock>
           ))}
         </section>
 
-        <section className="kuo-pizza">
+        <AutoFitBlock className="kuo-pizza" minScale={0.58}>
           <h2>{menu.pizza?.name || 'HOLZOFENPIZZA'}</h2>
           <p>{menu.pizza?.description || 'nach Wahl'}</p>
-        </section>
+        </AutoFitBlock>
 
-        <section className="kuo-included">
+        <AutoFitBlock className="kuo-included" minScale={0.52}>
           <h2>{menu.introTitle || 'MENÜ INKLUSIVE'}</h2>
           <p>{splitIncluded(menu.introDescription).map((line) => <span key={line}>{line}</span>)}</p>
-        </section>
+        </AutoFitBlock>
         </div>
       </div>
     </article>
+  );
+}
+
+function AutoFitBlock({ className, children, minScale = 0.5 }) {
+  const boxRef = useRef(null);
+  const contentRef = useRef(null);
+
+  useEffect(() => {
+    const box = boxRef.current;
+    const content = contentRef.current;
+    if (!box || !content) return undefined;
+
+    let frameId = 0;
+    let cancelled = false;
+
+    const fit = () => {
+      if (cancelled) return;
+
+      window.cancelAnimationFrame(frameId);
+      frameId = window.requestAnimationFrame(() => {
+        content.style.setProperty('--auto-fit-scale', '1');
+
+        const availableWidth = box.clientWidth;
+        const availableHeight = box.clientHeight;
+        const contentRect = content.getBoundingClientRect();
+        const neededWidth = Math.max(content.scrollWidth, contentRect.width);
+        const neededHeight = Math.max(content.scrollHeight, contentRect.height);
+        const widthScale = neededWidth > 0 ? availableWidth / neededWidth : 1;
+        const heightScale = neededHeight > 0 ? availableHeight / neededHeight : 1;
+        const nextScale = Math.max(minScale, Math.min(1, widthScale, heightScale));
+
+        content.style.setProperty('--auto-fit-scale', String(nextScale));
+      });
+    };
+
+    const observer = new ResizeObserver(fit);
+    observer.observe(box);
+    observer.observe(content);
+    fit();
+
+    if (document.fonts?.ready) {
+      document.fonts.ready.then(fit).catch(fit);
+    }
+
+    return () => {
+      cancelled = true;
+      window.cancelAnimationFrame(frameId);
+      observer.disconnect();
+    };
+  }, [children, minScale]);
+
+  return (
+    <section className={className} ref={boxRef}>
+      <div className="auto-fit-content" ref={contentRef}>
+        {children}
+      </div>
+    </section>
   );
 }
 
