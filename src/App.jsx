@@ -421,7 +421,7 @@ function KuonimattStory({ menu }) {
 
         <AutoFitBlock className="kuo-included" minScale={0.52}>
           <h2>{menu.introTitle || 'MENÜ INKLUSIVE'}</h2>
-          <p>{splitIncluded(menu.introDescription).map((line) => <span key={line}>{line}</span>)}</p>
+          <p>{menu.introDescription}</p>
         </AutoFitBlock>
         </div>
       </div>
@@ -566,7 +566,14 @@ function kuonimattTitleLines(value) {
   const text = String(value || '').replace(/\s+/g, ' ').trim();
   if (!text) return [''];
   if (text.length <= 24) return [text];
-  return balanceWords(text.split(' '), text.length > 62 ? 3 : 2);
+  const lines = balanceWords(text.split(' '), text.length > 62 ? 3 : 2);
+  if (lines.length === 2) {
+    const secondWords = lines[1].split(' ');
+    if (secondWords[0]?.toLowerCase() === 'an' && secondWords.length > 1) {
+      return [`${lines[0]} ${secondWords[0]}`, secondWords.slice(1).join(' ')];
+    }
+  }
+  return lines;
 }
 
 function fitMigaTitleClass(text) {

@@ -1075,33 +1075,37 @@ select {
 .kuo-menu-stack {
   position: absolute;
   z-index: 2;
-  top: 675px;
-  left: 340px;
-  width: 650px;
-  height: 1085px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 44px;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
   overflow: hidden;
   text-align: center;
 }
 
 .kuo-menu-stack .kuo-dishes {
-  position: static;
+  position: absolute;
+  inset: 0;
   width: 100%;
-  display: grid;
-  gap: 50px;
+  display: block;
 }
 
 .kuo-menu-stack .kuo-dish {
-  position: static;
-  left: auto;
-  width: 650px;
-  height: auto;
-  max-height: 285px;
-  display: flex;
+  position: absolute;
+  left: 372px;
+  width: 620px;
+  height: 250px;
+  max-height: none;
+  display: block;
   overflow: hidden;
+}
+
+.kuo-menu-stack .kuo-dish:nth-child(1) {
+  top: 682px;
+}
+
+.kuo-menu-stack .kuo-dish:nth-child(2) {
+  top: 1028px;
 }
 
 .kuo-menu-stack .kuo-dish h2 {
@@ -1158,28 +1162,34 @@ select {
 
 .kuo-menu-stack .kuo-pizza,
 .kuo-menu-stack .kuo-included {
-  position: static;
-  left: auto;
-  top: auto;
+  position: absolute;
   width: 650px;
-  flex: 0 0 auto;
   overflow: hidden;
 }
 
 .kuo-menu-stack .kuo-pizza {
+  top: 1418px;
+  left: 340px;
+  height: 130px;
   gap: 22px;
-  max-height: 140px;
+  max-height: none;
 }
 
 .kuo-menu-stack .kuo-included {
-  max-height: 190px;
+  top: 1618px;
+  left: 340px;
+  height: 155px;
+  max-height: none;
   gap: 15px;
-  margin-top: auto;
 }
 
 .kuo-menu-stack .kuo-included p {
-  display: grid;
+  display: block;
   gap: 0;
+  max-width: 650px;
+  font-size: 36px;
+  line-height: 1;
+  white-space: nowrap;
 }
 
 .kuo-menu-stack .kuo-included p span {
